@@ -1,0 +1,37 @@
+[
+    {
+        "number": 1,
+        "english": "Press 1",
+        "hindi": "1 दबाएँ",
+        "bengali": "১ চাপুন",
+        "telugu": "1 నొక్కండి"
+    },
+    {
+        "number": 2,
+        "english": "Press 2",
+        "hindi": "2 दबाएँ",
+        "bengali": "২ চাপুন",
+        "telugu": "2 నొక్కండి"
+    },
+    {
+        "number": 3,
+        "english": "Press 3",
+        "hindi": "3 दबाएँ",
+        "bengali": "৩ চাপুন",
+        "telugu": "3 నొక్కండి"
+    },
+    {
+        "number": 4,
+        "english": "Press 4",
+        "hindi": "4 दबाएँ",
+        "bengali": "৪ চাপুন",
+        "telugu": "4 నొక్కండి"
+    },
+    {
+        "number": 5,
+        "english": "Press 5",
+        "hindi": "5 दबाएँ",
+        "bengali": "৫ চাপুন",
+        "telugu": "5 నొక్కండి"
+    }
+]
