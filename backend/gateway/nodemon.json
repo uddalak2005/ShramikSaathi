@@ -1,5 +1,7 @@
 {
-  "watch" : ["."],
-  "ext": "ts, js",
-  "exec": "ts-node index.ts"
+  "watch": [
+    "."
+  ],
+  "ext": "js",
+  "exec": "node ./dist/index.js"
 }

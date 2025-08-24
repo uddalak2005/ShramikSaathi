@@ -30,17 +30,43 @@ class IvrController {
         this.constructJobSMS = this.constructJobSMS.bind(this);
     }
 
-    constructJobSMS(payload) {
-        return `Hi ${payload.name}, new job: ${payload.job}. Pay Rs ${payload.salary}. Task: ${payload.jobDescription}`;
+    async constructJobSMS(payload) {
+        const englishMessage = `Hi ${payload.name}, new job: ${payload.job}. Pay Rs ${payload.salary}. Task: ${payload.jobDescription}`;
+
+        const response = await fetch("https://revapi.reverieinc.com/", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "REV-API-KEY": process.env.REVERIE_API_KEY,
+                "REV-APP-ID": process.env.REVERIE_APP_ID,
+                "src_lang": "en",
+                "tgt_lang": "bn",
+                "domain": "generic",
+                "REV-APPNAME": "localization",
+                "REV-APPVERSION": "3.0"
+            },
+            body: JSON.stringify({
+                data: [englishMessage]
+            })
+        });
+
+        const json = await response.json();
+
+        if (!json || !json.responseList || !json.responseList[0] || !json.responseList[0].outString) {
+            throw new Error("Translation failed: " + JSON.stringify(json));
+        }
+
+        return json.responseList[0].outString; // ✅ Bengali translation
     }
+
 
     async textToSpeechAndPlay(session) {
         try {
             // Step 1: Construct the SMS text
-            const text = this.constructJobSMS(session);
+            const text = await this.constructJobSMS(session);
             console.log('Generated Text:', text);
 
-            // Step 2: Call Reverie TTS API (using documented endpoint and headers)
+            // Step 2: Call Reverie TTS API (using docu`mented endpoint and headers)
             const apiKey = process.env.REVERIE_API_KEY;
             const appId = process.env.REVERIE_APP_ID;
             const ttsUrl = 'https://revapi.reverieinc.com/';
@@ -316,10 +342,10 @@ class IvrController {
 
                 const gather = twimlResponse.gather({
                     input: 'dtmf',
-                    numDigits: 1,
+                    numDigits: 5,
                     action: `${process.env.BASE_URL}/ivr/saveBid`,
                     method: 'POST',
-                    timeout: 5
+                    timeout: 10
                 });
 
                 res.type('text/xml');
@@ -359,6 +385,8 @@ class IvrController {
 
 
             const bidsCollection = mongoose.connection.collection("bids"); // no "s"
+
+            console.log(session.id, session.jobId);
 
             const newBid = await bidsCollection.insertOne({
                 jobId: new mongoose.Types.ObjectId(session.jobId),

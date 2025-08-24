@@ -1,0 +1,171 @@
+services:
+  # ========================
+  # Gateway
+  # ========================
+  gateway:
+    build:
+      context: ./gateway
+      dockerfile: dockerfile
+    container_name: gateway
+    ports:
+      - "3000:3000" # adjust if your gateway runs on another port
+    depends_on:
+      - auth-service
+      - community-service
+      - ivr-service
+      - mandi-service
+      - notification-service
+    networks:
+      - shramiksaathi
+
+  # ========================
+  # Auth Service
+  # ========================
+  auth-service:
+    build:
+      context: ./services/auth-service
+      dockerfile: dockerfile
+    container_name: auth-service
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - MONGO_URI=mongodb+srv://uddalakmukhopadhyay:Uddalak2005@cluster0.fifwikr.mongodb.net/Shramiksaathi
+      - ORIGIN=*
+      - JWT_SECRET=hon8LujUJJsyHMgRqfSKZrSPzJDeSSL/K+KmxfSuxjg=
+      - RABBIT_URL=amqp://guest:guest@rabbitmq:5672
+    networks:
+      - shramiksaathi
+    depends_on:
+      - rabbitmq
+      - redis
+
+  # ========================
+  # Community Service
+  # ========================
+  community-service:
+    build:
+      context: ./services/community-service
+      dockerfile: dockerfile
+    container_name: community-service
+    ports:
+      - "3004:3004"
+    environment:
+      - PORT=3004
+      - MONGO_URI=mongodb+srv://uddalakmukhopadhyay:Uddalak2005@cluster0.fifwikr.mongodb.net/Shramiksaathi
+      - ORIGIN=*
+      - JWT_SECRET=hon8LujUJJsyHMgRqfSKZrSPzJDeSSL/K+KmxfSuxjg=
+      - RABBIT_URL=amqp://guest:guest@rabbitmq:5672
+    networks:
+      - shramiksaathi
+    depends_on:
+      - rabbitmq
+      - redis
+
+  # ========================
+  # IVR Service
+  # ========================
+  ivr-service:
+    build:
+      context: ./services/ivr-service
+      dockerfile: dockerfile
+    container_name: ivr-service
+    ports:
+      - "3005:3005"
+    environment:
+      - PORT=3005
+      - MONGO_URI=mongodb+srv://uddalakmukhopadhyay:Uddalak2005@cluster0.fifwikr.mongodb.net/Shramiksaathi
+      - BASE_URL=https://sort-projectors-pubs-landscape.trycloudflare.com
+      - ALERT_EMAIL=ujaanmukherjee2005@gmail.com
+      - ALERT_PASS=acqropglhheagjzr
+      - CLOUDINARY_CLOUD_NAME=djd6ovzuc
+      - CLOUDINARY_API_KEY=661697976329398
+      - CLOUDINARY_API_SECRET=rg9GlCFI28GKgHm82WA8bmMnZ5o
+      - TWILIO_ACCOUNT_SID=AC42daf9569f6bbf98f8029055692019b1
+      - TWILIO_AUTH_TOKEN=92802cfbbd9451de90f434b4a1bf4dbb
+      - TWILIO_PHONE_NUMBER=+18149149380
+      - REVERIE_API_KEY=25a94bc6120b6dda4b06aa9ab6d82b9112c97744
+      - REVERIE_APP_ID=dev.geviwo4070
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - RABBIT_URL=amqp://guest:guest@rabbitmq:5672
+    networks:
+      - shramiksaathi
+    depends_on:
+      - rabbitmq
+      - redis
+
+  # ========================
+  # Mandi Service
+  # ========================
+  mandi-service:
+    build:
+      context: ./services/mandi-service
+      dockerfile: dockerfile
+    container_name: mandi-service
+    ports:
+      - "3002:3002"
+    environment:
+      - PORT=3002
+      - MONGO_URI=mongodb+srv://uddalakmukhopadhyay:Uddalak2005@cluster0.fifwikr.mongodb.net/Shramiksaathi
+      - ORIGIN=*
+      - JWT_SECRET=hon8LujUJJsyHMgRqfSKZrSPzJDeSSL/K+KmxfSuxjg=
+      - RABBIT_URL=amqp://guest:guest@rabbitmq:5672
+
+    networks:
+      - shramiksaathi
+    depends_on:
+      - rabbitmq
+      - redis
+
+  # ========================
+  # Notification Service
+  # ========================
+  notification-service:
+    build:
+      context: ./services/notification-service
+      dockerfile: dockerfile
+    container_name: notification-service
+    ports:
+      - "3003:3003"
+    environment:
+      - RABBIT_URL=amqp://guest:guest@rabbitmq:5672
+      - TWILIO_ACCOUNT_SID=AC42daf9569f6bbf98f8029055692019b1
+      - TWILIO_AUTH_TOKEN=92802cfbbd9451de90f434b4a1bf4dbb
+      - TWILIO_PHONE=+18149149380
+      - PORT=3003
+      - ALERT_EMAIL=ujaanmukherjee2005@gmail.com
+      - ALERT_PASS=acqropglhheagjzr
+    networks:
+      - shramiksaathi
+    depends_on:
+      - rabbitmq
+      - redis
+
+  # ========================
+  # MongoDB (shared)
+  # ========================
+
+  # ========================
+  # RabbitMQ (shared)
+  # ========================
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672" # broker
+      - "15672:15672" # management UI
+    networks:
+      - shramiksaathi
+
+  redis:
+    image: redis:7
+    container_name: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - shramiksaathi
+
+networks:
+  shramiksaathi:
+    driver: bridge

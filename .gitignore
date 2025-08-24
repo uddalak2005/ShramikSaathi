@@ -6,3 +6,5 @@ backend/services/*/.env
 
 frontend/.env
 frontend/node_modules
+
+backend/docker-compose.yml

@@ -1,0 +1,11 @@
+import express from "express";
+import { authMiddleware } from "../middleware/auth.middleware.js";
+import CommunityController from "../controllers/community.controller.js";
+import PostsController from "../controllers/posts.controller.js";
+const communityRouter = express.Router();
+communityRouter.post("/create", authMiddleware, CommunityController.createCommunity);
+communityRouter.get("/getCommunity", authMiddleware, CommunityController.getCommunity);
+communityRouter.post("/createPost", authMiddleware, PostsController.createPost);
+communityRouter.get("/", authMiddleware, PostsController.getAllPosts);
+communityRouter.get("/resolve/:postId", authMiddleware, PostsController.resolveIssue);
+export default communityRouter;
