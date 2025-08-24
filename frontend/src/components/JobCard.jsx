@@ -56,7 +56,8 @@ const JobCard = ({
     transition-all duration-300 cursor-pointer p-4 bg-white">
       
       {bidDialogue && (
-  <div className="bg-black/50 absolute inset-0 flex items-center justify-center z-50">
+  <div className="bg-black/50 absolute left-0 w-full h-screen flex items-center justify-center z-50"
+    style={{ top: `${scrollY}px` }}>
     <div className="bg-white rounded-xl shadow-lg p-6 w-full max-w-md">
       {/* Title */}
       <h2 className="text-lg font-semibold text-gray-800 mb-4">
