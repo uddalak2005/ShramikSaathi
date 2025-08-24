@@ -1,0 +1,179 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Brand Colors - Migrant Worker Platform */
+    --background: 0 0% 100%;
+    /* FFF5F2 approximated in HSL */
+    --foreground: 210 40% 10%;
+    /* Weight color #064232 */
+
+    --card: 0 0% 100%;
+    /* white-ish cards */
+    --card-foreground: 210 40% 10%;
+    /* Weight color */
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 40% 10%;
+
+    /* Primary Color - Background & Highlights */
+    --primary: 20 100% 98%;
+    /* #FFF5F2 */
+    --primary-foreground: 210 40% 10%;
+    /* Weight color */
+    --primary-light: 20 100% 100%;
+    --primary-dark: 20 100% 90%;
+
+    /* Secondary Color - Accent / Buttons */
+    --secondary: 10 75% 85%;
+    /* #F5BABB */
+    --secondary-foreground: 210 40% 10%;
+    --secondary-light: 10 75% 95%;
+    --secondary-dark: 10 75% 75%;
+
+    /* Status / Success / Info */
+    --success: 170 30% 35%;
+    /* #568F87 */
+    --success-foreground: 0 0% 98%;
+    --success-light: 170 30% 50%;
+
+    /* Neutral Tones */
+    --muted: 0 0% 95%;
+    --muted-foreground: 210 15% 50%;
+
+    --accent: 210 40% 10%;
+    /* Weight */
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 75% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 210 15% 85%;
+    --input: 210 15% 90%;
+    --ring: 210 40% 10%;
+
+    --radius: 0.5rem;
+
+    /* Design System Extensions */
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-warm: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--secondary-light)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(var(--success-light)));
+
+    --shadow-soft: 0 4px 6px -1px hsl(var(--primary) / 0.1), 0 2px 4px -1px hsl(var(--primary) / 0.06);
+    --shadow-medium: 0 10px 15px -3px hsl(var(--primary) / 0.1), 0 4px 6px -2px hsl(var(--primary) / 0.05);
+    --shadow-large: 0 20px 25px -5px hsl(var(--primary) / 0.1), 0 10px 10px -5px hsl(var(--primary) / 0.04);
+
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  }
+
+  .dark {
+    --background: 210 40% 10%;
+    /* Weight / dark */
+    --foreground: 0 0% 98%;
+    /* FFF5F2 light text */
+
+    --card: 210 40% 10%;
+    --card-foreground: 0 0% 98%;
+
+    --primary: 20 100% 98%;
+    /* FFF5F2 */
+    --primary-foreground: 210 40% 10%;
+
+    --secondary: 10 75% 85%;
+    /* F5BABB */
+    --secondary-foreground: 210 40% 10%;
+
+    --success: 170 30% 35%;
+    /* 568F87 */
+    --success-foreground: 0 0% 98%;
+
+    --accent: 210 40% 10%;
+    /* Weight */
+    --accent-foreground: 0 0% 98%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+/* :root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
