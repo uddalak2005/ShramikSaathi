@@ -1,4 +1,4 @@
-# Migrant Worker Support Platform
+# ShramikSaathi
 
 ## Overview
 The **Migrant Worker Support Platform** is a full-stack application designed to empower migrant workers by providing them with essential digital services.  
