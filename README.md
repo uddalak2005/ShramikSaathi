@@ -1,129 +1,147 @@
-# ShramikSaathi
+🛠️ Shramiksaathi – Migrant Worker Welfare Application
 
-## Overview
-The **Migrant Worker Support Platform** is a full-stack application designed to empower migrant workers by providing them with essential digital services.  
-It helps them find jobs, negotiate wages, access loans based on work history and community reviews, seek legal support, and engage in a community forum.  
-For workers without smartphones, the platform also integrates an **IVR system** that allows interaction via calls and SMS.  
+Empowering India’s migrant workforce through technology, welfare, and dignity.
 
-An AI-powered **Neural-Symbolic RAG Chat Agent** further assists workers by answering their queries in an intuitive and personalized manner.
+Shramiksaathi is a welfare-focused mobile and IVR application designed to support migrant workers in India. Migrant workers often face exploitation, lack of access to government schemes, language barriers, job insecurity, and social isolation. This platform aims to bridge the gap between workers, NGOs, government resources, and financial institutions through secure, multilingual, and accessible technology.
 
----
+🌍 Vision
 
-## Features
-- **Job Portal**: Workers can browse and apply for jobs, post requirements, and negotiate wages.
-- **Loan Support**: Loan opportunities are offered based on worker performance, job history, and reviews.
-- **Community Forum**: A space where workers can post grievances, queries, or success stories.
-- **Legal Support**: Dedicated support page offering guidance on legal issues.
-- **AI Chat Agent**: Neural-symbolic RAG-based assistant that answers worker queries naturally.
-- **IVR System**: Workers without smartphones can book jobs, access services, and interact via **Twilio-powered IVR** and SMS.
-- **Authentication**: Secure token-based authentication system.
-- **Mailing Services**: Notifications and updates via **Nodemailer**.
-- **Database**: All data stored securely in **MongoDB**.
+A one-stop platform that:
 
----
+Connects migrant workers to government schemes, financial aid, job opportunities, and legal advocacy.
 
-## Tech Stack
+Builds community trust through secure communication, fair marketplaces, and NGO partnerships.
 
-### Frontend
-- **React + Vite**  
-- TailwindCSS / shadcn (UI styling)  
-- Context API for authentication and global state  
+Prioritizes data privacy, fairness, and accessibility with compliance to India’s DPDP Act and RBI guidelines.
 
-### Backend
-- **Node.js + Express**  
-- TypeScript (for services and gateway)  
-- REST APIs for authentication, job management, community, and legal services  
+👥 Target Users
 
-### IVR
-- **Twilio** integration for calls, SMS, and job booking  
+Migrant Workers: Skilled & unskilled, urban & rural.
 
-### AI Engine
-- **HuggingFace Transformers**, **PyTorch**, **scikit-learn**  
-- Neural-Symbolic RAG models for contextual query answering  
+NGOs: Moderators, advocates, and support providers.
 
-### Database
-- **MongoDB**  
+Employers & Consumers: Access to verified worker marketplace.
 
-### Other
-- **Nodemailer** (email services)  
-- **JWT** for token-based authentication  
+Microfinance Banks: Loan & credit partners.
 
----
+🔑 Core Principles
 
-## Project Structure
+🔒 Security: End-to-end encryption, anonymized data, regular audits.
 
-### Backend
-```
-backend/
-├── gateway/ # API gateway (entry point for services)
-├── services/
-│ ├── auth-service/ # Authentication & user management
-│ ├── community-service # Community forum APIs
-│ ├── ivr-service/ # IVR system integration (Twilio)
-│ ├── mandi-service/ # Market/job-related services
-```
+⚖️ Fairness: AI trained on diverse datasets (regional dialects, demographics).
 
+📶 Accessibility: Multilingual voice input/output, IVR support, offline caching.
 
-### Frontend
-```
-frontend/
-├── src/
-│ ├── components/ # UI components (cards, loaders, layouts, etc.)
-│ ├── context/ # Auth context and global state
-│ ├── pages/ # Pages (Jobs, Loans, Community, Legal, etc.)
-│ ├── App.jsx # Root application
-│ ├── main.jsx # Entry point
-```
+🤝 Sustainability: NGO partnerships for trust & scalability.
 
+📊 Monitoring: Built-in analytics, fraud detection, feedback loops.
 
----
+📱 Key Features
+1. RAG-powered Government Schemes Finder
 
-## Installation & Setup
+Problem: Migrants miss out on benefits due to jargon, scattered info, language barriers.
 
-### Prerequisites
-- Node.js (>=18)
-- MongoDB (local or cloud, e.g., MongoDB Atlas)
-- Python (for AI engine training/deployment)
-- Twilio account (for IVR & SMS)
+Solution:
 
----
+Uses Retrieval-Augmented Generation (RAG) to fetch real-time scheme info.
 
-### Backend Setup
-```bash
-cd backend
+Multilingual voice/text queries (e.g., “What health schemes are available?”).
 
-# Install dependencies for all services
-cd gateway && npm install
-cd ../services/auth-service && npm install
-cd ../services/community-service && npm install
-cd ../services/ivr-service && npm install
-cd ../services/mandi-service && npm install
+Personalized recommendations + offline caching of popular schemes.
 
-# Run gateway
-cd ../../gateway
-npm run dev
+Mitigation: Verified API sources, cached fallback, push notifications for deadlines.
 
-#Frontend setup
-cd frontend
+2. Location-based Community with Hate Speech Detection
 
-# Install dependencies
-npm install
+Problem: Isolation, discrimination, and lack of local trusted support.
 
-# Start development server
-npm run dev
+Solution:
 
-# Common
-MONGO_URI=mongodb+srv://<user>:<password>@cluster.mongodb.net
-JWT_SECRET=your_secret_key
+Geo-fenced community groups with NGO moderation.
 
-# Nodemailer
-MAIL_USER=your_email@example.com
-MAIL_PASS=your_email_password
+AI-powered hate speech detection trained on Indian dialects.
 
-# Twilio
-TWILIO_ACCOUNT_SID=your_account_sid
-TWILIO_AUTH_TOKEN=your_auth_token
-TWILIO_PHONE_NUMBER=your_twilio_number
+Anonymous posting, trusted helper badges, gamified contributions.
+
+Mitigation: Opt-in location privacy, NGO verification, user reporting system.
+
+3. Mandi Marketplace for Skills
+
+Problem: Exploitation & unfair wages in informal jobs.
+
+Solution:
+
+Peer-to-peer job marketplace for workers & employers.
+
+Fair wage suggestions, escrow payments, verified profiles.
+
+NGO endorsements for skills & ratings.
+
+Mitigation: Wage floors, escrow fund release, fraud detection AI.
+
+4. Loan Application with Credit Justification
+
+Problem: Migrants rely on high-interest informal loans.
+
+Solution:
+
+Alternative credit scoring using earnings, ratings, job history.
+
+Links with local microfinance banks & govt-backed loans.
+
+Financial literacy modules + repayment calculators.
+
+Mitigation: Anonymized data sharing, capped interest rates, blockchain-like audit trails.
+
+5. Free Advocacy & Legal Support
+
+Problem: Wage theft, harassment, and lack of affordable advocacy.
+
+Solution:
+
+Simple IVR/click interface to raise disputes.
+
+Connects to NGOs & advocates; tracks case progress.
+
+Emergency escalation (hotlines, police support).
+
+Mitigation: Encrypted case records, verified NGO network, SMS/IVR fallback.
 
 
+🛡️ Loophole Minimization
 
+API Failures → Redundancy & cached offline data.
+
+Fraudulent Accounts → Video/ID verification + escrow.
+
+Hate Speech/Spam → AI detection + NGO moderation.
+
+Loan Defaults → Ethical scoring + small loan trials.
+
+Privacy Risks → End-to-end encryption + anonymization.
+
+🗣️ Tech Stack (Proposed)
+
+Frontend: React.js
+
+Backend: Python (FastAPI/Flask), Express.js, Node.js for real-time.
+
+Database: MongoDB + Redis (caching).
+
+AI/NLP: RAG (Pinecone + multilingual embeddings).
+
+Telephony: IVR via Twilio/Exotel.
+
+Hosting: AGCP scalable infra.
+
+Models: All models are Build in-house.
+
+🎯 Impact
+
+Empowers workers: Access to welfare schemes & fair jobs.
+
+Builds trust: NGO moderation & fair-pay systems.
+
+Improves financial stability: Ethical loans, advocacy support.
+
+Strengthens communities: Safe local forums & resource sharing.
