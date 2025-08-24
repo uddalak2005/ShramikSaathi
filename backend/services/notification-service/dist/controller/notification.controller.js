@@ -2,34 +2,31 @@ import amqp from "amqplib";
 import twilioUtils from "../utils/twilio.util.js";
 export async function constructJobSMS(payload) {
     const englishMessage = `Hi ${payload.name}, new job: ${payload.job}. Pay Rs ${payload.salary}. Task: ${payload.jobDescription}`;
+
     const response = await fetch("https://revapi.reverieinc.com/", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "REV-API-KEY": process.env.REVERIE_API_KEY,
             "REV-APP-ID": process.env.REVERIE_APP_ID,
+            "src_lang": "en",
+            "tgt_lang": "bn",
+            "domain": "generic",
             "REV-APPNAME": "localization",
             "REV-APPVERSION": "3.0"
         },
         body: JSON.stringify({
-            src_lang: "en",
-            tgt_lang: "bn",
-            domain: "generic",
             data: [englishMessage]
         })
     });
-    if (!response.ok) {
-        throw new Error(`Reverie API error: ${response.status} ${response.statusText}`);
-    }
-    const json = (await response.json());
-    console.log("Reverie API response:", JSON.stringify(json, null, 2));
-    const translation = json.responseList?.[0]?.outString ||
-        json.translatedText ||
-        null;
-    if (!translation) {
+
+    const json = await response.json();
+
+    if (!json || !json.responseList || !json.responseList[0] || !json.responseList[0].outString) {
         throw new Error("Translation failed: " + JSON.stringify(json));
     }
-    return translation;
+
+    return json.responseList[0].outString;
 }
 class NotificationController {
     async notificationConsumerForJobAlert() {

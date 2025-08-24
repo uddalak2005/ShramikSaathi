@@ -3,6 +3,9 @@ import cors from 'cors';
 import NotificationController from "./controller/notification.controller.js";
 import nodemailer from "nodemailer";
 import twilio from "twilio";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const { twiml } = twilio;
 
@@ -162,7 +165,9 @@ app.post("/sendEmail", async (req, res) => {
 
         await transporter.sendMail(mailOptions);
 
-        const client = twilio(this.accountSid, this.authToken);
+        console.log(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+        const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
 
         const call = await client.calls.create({
             from: "+18149149380",
@@ -269,6 +274,8 @@ async function textToSpeechAndPlay(session) {
         const appId = process.env.REVERIE_APP_ID;
         const ttsUrl = 'https://revapi.reverieinc.com/';
         const speaker = 'bn_female'; // You can make this dynamic based on language
+
+        console.log(apiKey, appId)
 
         const response = await axios.post(ttsUrl, {
             text: text
