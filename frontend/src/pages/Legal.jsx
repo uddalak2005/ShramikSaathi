@@ -3,9 +3,11 @@ import {
   Scale, FileText, HelpCircle, Users, Phone, MessageCircle,
   CheckCircle, Clock, AlertTriangle, BookOpen, Gavel, Shield
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Legal = () => {
   const [isQueryDialogOpen, setIsQueryDialogOpen] = useState(false);
+  const navigate = useNavigate();
 
   const legalResources = [
     {
@@ -164,7 +166,7 @@ const Legal = () => {
 
               <button 
                 className="bg-yellow-400 text-black px-4 py-2 rounded-lg font-semibold flex items-center"
-                onClick={() => setIsQueryDialogOpen(true)}
+                onClick={() => navigate("/rag")}
               >
                 <HelpCircle className="h-4 w-4 mr-2" />
                 Ask Legal Question

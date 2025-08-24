@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Users, Shield, Heart, ArrowRight, Briefcase, Scale, CreditCard } from "lucide-react";
 import { useState } from "react";
 import { useAuth } from "../context/AuthContext";
@@ -10,6 +10,7 @@ const Landing = () => {
   const {login,logout,auth} = useAuth();
   const userName = auth?.userName || 'Souherdya';
   const userRole = auth?.role || 'Worker';
+  const navigate = useNavigate();
   const features = [
     {
       icon: Briefcase,
@@ -59,10 +60,11 @@ const Landing = () => {
                   </button>
                 </Link>
 
-                <Link to="/login">
+                <Link to="/dashboard">
                   <button className="flex items-center bg-secondary-foreground justify-center 
                   text-primary font-semibold hover:bg-secondary-foreground/70 hover:text-primary 
-                  px-8 py-4 text-lg rounded-lg">
+                  px-8 py-4 text-lg rounded-lg"
+                 >
                     Sign In
                   </button>
                 </Link>

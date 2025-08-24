@@ -16,7 +16,7 @@ const CustomLoader = ({onClose}) => {
     if (currentStep < steps.length - 1) {
       const timer = setTimeout(() => {
         setCurrentStep((prev) => prev + 1);
-      }, 3000); // 3s delay
+      }, 5000); // 3s delay
       return () => clearTimeout(timer);
     } else {
       // when last step is reached, mark done

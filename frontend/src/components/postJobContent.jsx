@@ -15,7 +15,7 @@ const PostJobDialog = ({ open, onOpenChange }) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (!formData.title || !formData.description || !formData.location) {
@@ -24,6 +24,25 @@ const PostJobDialog = ({ open, onOpenChange }) => {
     }
 
     console.log("Job posting data:", { ...formData, startDate, endDate });
+
+    try{
+      const token = localStorage.getItem("authToken");
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/mandi/getJobs` , {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      if(res.ok){
+        const data = await res.json();
+        console.log(data);
+
+        console.log("Job posted!");
+      }
+    } catch (error) {
+      
+    }
     alert("Job Posted Successfully! Your job posting is now live.");
 
     setFormData({

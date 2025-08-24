@@ -19,10 +19,41 @@ const Loans = () => {
   const [activeTab, setActiveTab] = useState("browse-loans");
   const [loanApply,setloanApply] = useState(false);
 
+  const sendEmails = async (data) => {
+  try {
+    console.log("📤 Sending email...");
+
+    const res = await fetch(`${import.meta.env.VITE_BACKEND_URL}/notification/sendEmail`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', // ✅ fixed
+      },
+      body: JSON.stringify({
+        metrics: data.metrics,
+        worker_profile: data.worker_profile,
+      }),
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Server error: ${res.status} - ${errorText}`);
+    }
+
+    const result = await res.json(); // ✅ parse response
+    console.log("✅ Email API response:", result);
+    return result;
+
+  } catch (error) {
+    console.error("❌ Failed to send email:", error);
+  }
+};
+
+
+
   const LoanApplication = async() => {
     try {
       console.log("Calling loan")
-      const res = await fetch(`${import.meta.env.VITE_LOAN_URL}/worker_forecast`,{
+      const res = await fetch(`${import.meta.env.VITE_LOAN_URL}/worker_forecast/`,{
         method: 'POST',
         headers:{
           'Content-Type' : 'Application/json'
@@ -34,6 +65,7 @@ const Loans = () => {
 
       if(res.ok){
         const data = await res.json();
+        sendEmails(data);
         console.log(data);
       }
     } catch (error) {
